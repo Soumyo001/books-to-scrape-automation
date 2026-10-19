@@ -5,6 +5,7 @@ class HomePage:
 
     def __init__(self, page: Page) -> None:
         self.page = page
+        self.all_links = page.locator("a")
         self.book_links = page.locator("ol.row article.product_pod h3 a")
         self.book_cards = page.locator("ol.row article.product_pod")
 
