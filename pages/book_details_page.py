@@ -8,3 +8,4 @@ class BookDetailsPage:
         self.heading = page.locator("h1")
         self.product_summary = page.locator(".product_main")
         self.information_table = page.locator("table.table-striped")
+        self.price = self.product_summary.locator(".price_color")

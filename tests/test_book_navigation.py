@@ -1,29 +1,9 @@
-import random, pytest
+import pytest
 from urllib.parse import urljoin
-from playwright.sync_api import Browser, Page, expect
+from playwright.sync_api import Page, expect
 from config import BOOKS_HOME_URL
 from pages.home_page import HomePage
 from pages.book_details_page import BookDetailsPage
-
-@pytest.fixture(scope="module")
-def random_book_indices(browser: Browser) -> list[int]:
-    """select 5 random books from homepage"""
-
-    context = browser.new_context()
-
-    try:
-        page = context.new_page()
-        page.goto(BOOKS_HOME_URL)
-
-        homepage = HomePage(page)
-        expect(homepage.book_links.first).to_be_visible()
-
-        total_books = homepage.book_links.count()
-        assert total_books >= 5, f"Required at least 5 books, found {total_books}"
-
-        return random.sample(range(total_books), 5)
-    finally:
-        context.close()
 
 @pytest.mark.regression
 @pytest.mark.parametrize("book_number", range(5))
