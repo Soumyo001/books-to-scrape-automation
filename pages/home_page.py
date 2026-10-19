@@ -8,6 +8,9 @@ class HomePage:
         self.all_links = page.locator("a")
         self.book_links = page.locator("ol.row article.product_pod h3 a")
         self.book_cards = page.locator("ol.row article.product_pod")
+        self.product_images = self.book_cards.locator("img")
+        self.next_link = page.locator("li.next a")
+        self.pager = page.locator(".pager")
 
     def book_link(self, index: int) -> Locator:
         return self.book_links.nth(index)
@@ -17,3 +20,6 @@ class HomePage:
 
     def open_book(self, index: int) -> None:
         self.book_link(index).click()
+
+    def open_next_page(self) -> None:
+        self.next_link.click()
